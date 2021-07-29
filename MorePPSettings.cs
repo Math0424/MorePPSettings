@@ -4,7 +4,9 @@ using Sandbox.Graphics.GUI;
 using Sandbox.ModAPI;
 using SpaceEngineers.Game.GUI;
 using VRage.Plugins;
+using VRage.Utils;
 using VRageMath;
+using VRageRender;
 
 namespace MorePPSettings
 {
@@ -16,6 +18,8 @@ namespace MorePPSettings
             PPSettings.Static = PPSettings.DefaultSettings;
             PPSettings.Load();
             x.PatchAll();
+
+            MySession.AfterLoading += Loaded;
         }
 
         [HarmonyPatch(typeof(MyGuiScreenOptionsGraphics))]
@@ -46,14 +50,28 @@ namespace MorePPSettings
             }
 
         }
-        
+
         //probably a dumb idea- but sometimes it just resets
+        int count = 300;
         public void Update()
         {
+            if (count > 0)
+            {
+                count--;
+                return;
+            }
             if (MyAPIGateway.Session != null)
             {
-                PPSettings.Apply();
+                if (PPSettings.IsDifferent())
+                {
+                    PPSettings.Apply();
+                }
             }
+        }
+
+        public void Loaded()
+        {
+            PPSettings.Apply();
         }
 
         public void Dispose()

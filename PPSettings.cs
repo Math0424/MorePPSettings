@@ -14,6 +14,13 @@ namespace MorePPSettings
     {
         public static Settings Static;
 
+        private static MyPostprocessSettings.Layout sett;
+
+        public static bool IsDifferent()
+        {
+            return !MyPostprocessSettingsWrapper.Settings.Data.Equals(sett);
+        }
+
         public struct Settings
         {
             public bool EnableBloom;
@@ -143,7 +150,8 @@ namespace MorePPSettings
 
             MyPostprocessSettingsWrapper.Settings.Data.Brightness = Static.Brightness;
             MyPostprocessSettingsWrapper.Settings.Data.Saturation = Static.Saturation;
-            
+
+            sett = MyPostprocessSettingsWrapper.Settings.Data;
         }
 
         public static void Load()
