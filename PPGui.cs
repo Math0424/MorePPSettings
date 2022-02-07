@@ -9,7 +9,7 @@ namespace MorePPSettings
     class PPGui : MyGuiScreenBase
     {
 
-        private MyGuiControlCheckbox ambient, playerShake, eyeadaption, vignette, fullbright, bloom, chromatic, glare;
+        private MyGuiControlCheckbox playerShake, eyeadaption, vignette, fullbright, bloom, chromatic, glare;
         private MyGuiControlSlider bloomSize, bloomMulti, vignetteLength, vignetteStart, bloomSlidr, bloomDirt, chromaticFactor, saturation, brightness;
         private MyGuiControlColor headlamp;
 
@@ -57,14 +57,13 @@ namespace MorePPSettings
             headlamp.Color.Alpha(255);
 
             //ambient
-            ambient = AddCheckbox("Ambient Occlusion", new Vector2(-.31f, .17f), PPSettings.Static.EnableAmbientOcclusion);
             eyeadaption = AddCheckbox("Eye Adaptation", new Vector2(-.31f, .22f), PPSettings.Static.EnableEyeAdaption);
 
             //misc
             playerShake = AddCheckbox("Player shake", new Vector2(-.1f, .17f), PPSettings.Static.EnablePlayerShake);
             fullbright = AddCheckbox("Fullbright", new Vector2(-.1f, .22f), PPSettings.Static.EnableFullbright);
 
-            glare = AddCheckbox("Sun glare", new Vector2(.05f, .17f), PPSettings.Static.EnableSunGlare);
+            glare = AddCheckbox("Sun glare", new Vector2(-.31f, .17f), PPSettings.Static.EnableSunGlare);
 
             var button = new MyGuiControlButton()
             {
@@ -94,7 +93,6 @@ namespace MorePPSettings
 
         public void ApplySettings()
         {
-            PPSettings.Static.EnableAmbientOcclusion = ambient.IsChecked;
             PPSettings.Static.EnablePlayerShake = playerShake.IsChecked;
             PPSettings.Static.EnableEyeAdaption = eyeadaption.IsChecked;
             PPSettings.Static.EnableVignette = vignette.IsChecked;

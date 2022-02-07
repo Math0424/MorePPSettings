@@ -3,10 +3,9 @@ using Sandbox.Game.World;
 using Sandbox.Graphics.GUI;
 using Sandbox.ModAPI;
 using SpaceEngineers.Game.GUI;
+using System.Reflection;
 using VRage.Plugins;
-using VRage.Utils;
 using VRageMath;
-using VRageRender;
 
 namespace MorePPSettings
 {
@@ -17,7 +16,7 @@ namespace MorePPSettings
             var x = new Harmony("MorePPSettings");
             PPSettings.Static = PPSettings.DefaultSettings;
             PPSettings.Load();
-            x.PatchAll();
+            x.PatchAll(Assembly.GetExecutingAssembly());
 
             MySession.AfterLoading += Loaded;
         }
@@ -34,7 +33,7 @@ namespace MorePPSettings
                 float y = MyGuiConstants.SCREEN_CAPTION_DELTA_Y * 0.5f;
                 Vector2 vector = (__instance.Size.Value / 2f - value) * new Vector2(-1f, -1f) + new Vector2(0f, y);
                 Vector2 value8 = vector + new Vector2(0.4f, 0f);
-                Vector2 value4 = new Vector2(0f, 0.045f);
+                Vector2 value4 = new Vector2(0f, 0.049f);
                 var button = new MyGuiControlButton()
                 {
                     Position = value8 + 15f * value4,
